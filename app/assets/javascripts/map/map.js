@@ -5,17 +5,32 @@ TackyTrips.Map = function(mapSelector){
     center: { lat: 37, lng: -122},
     zoom: 8
   }
-  console.log(mapSelector)
-  console.log(mapOtions)
   this.initialize(mapSelector, mapOtions)
 }
 
 TackyTrips.Map.prototype = {
   initialize: function(mapSelector, mapOtions) {
-    console.log($(mapSelector)[0])
     this.map = new google.maps.Map($(mapSelector)[0], mapOtions);
+    this.setUpGeoLocation()
+  },
+  setUpGeoLocation: function(){
+    this.getCenter()
+  },
+  getCenter: function(){
+    this.getGeoLocation().then(function(pos){ this.map.setCenter(pos) }.bind(this))
+  },
+  getGeoLocation: function(){
+    return new Promise(function(success, fail) {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
+        success(pos)
+        })
+      }
+    })
   }
 }
+
 
 
 $(document).ready(function() {
