@@ -3,9 +3,10 @@ var TackyTrips = {}
 TackyTrips.Map = function(mapSelector){
   var mapOtions = {
     center: { lat: 37, lng: -122},
-    zoom: 8
+    zoom: 4
   }
   this.initialize(mapSelector, mapOtions)
+  this.getAllPinLocations()
 }
 
 TackyTrips.Map.prototype = {
@@ -28,6 +29,20 @@ TackyTrips.Map.prototype = {
         })
       }
     })
+  },
+  getAllPinLocations: function(){
+    $.ajax({
+      url: '/trips',
+    }).done(this.dropAPin.bind(this))
+  },
+  dropAPin: function(allPins){
+    for (var i = 0; i < allPins.trips.length; i++){
+      var latLong = new google.maps.LatLng(allPins.trips[i].lat, allPins.trips[i].lng)
+      var marker = new google.maps.Marker({
+        position: latLong,
+        map: this.map 
+      })
+   }
   }
 }
 
