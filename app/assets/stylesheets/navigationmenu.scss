@@ -1,0 +1,33 @@
+nav { 
+  background-color: #1abc9c; 
+  text-align: center;
+  position: fixed;
+  top: 0px;
+  height: 100%;
+  background-color:rgba(26,188,156, .9);
+  h1 { 
+    font-family: 'Crafty Girls', cursive; 
+    margin: 0;
+    font-size: 3em;
+    color: white;
+    padding: .5em;
+    }
+  li { 
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    list-style: none;
+    padding-top: .5em;
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+  ul {
+    padding: 0;
+    }
+  .signature-bottom {
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    }
+  }
+

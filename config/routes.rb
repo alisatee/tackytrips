@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'trips#index'
 
+  get '/trips' => 'trips#get_trip_locations'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
