@@ -13,7 +13,7 @@ TackyTrips.DirectionController.prototype = {
     var rendererOptions = {
       map: this.map
     }
-    var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions)
+    this.directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions)
     var stepDisplay = new google.maps.InfoWindow()
   },
   bindFormInputs: function(){
@@ -32,8 +32,19 @@ TackyTrips.DirectionController.prototype = {
     })
   },
   drawDirectionPath: function(directionData){
-    console.log("YOU MADE IT")
-    console.log(directionData)
+    var destination = directionData[0].value
+    var start = directionData[1].value
+    var request = {
+      origin: start,
+      destination: destination,
+      travelMode: google.maps.TravelMode.DRIVING
+    }
+    var that = this
+    this.directionsService.route(request, function(response, status){
+      if (status == google.maps.DirectionsStatus.OK){
+        that.directionsDisplay.setDirections(response)
+      }
+    })
   }
 
 }
