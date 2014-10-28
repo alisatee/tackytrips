@@ -12,7 +12,7 @@ TackyTrips.Map.prototype = {
     this.map = new google.maps.Map($(mapSelector)[0], mapOtions);
     this.setUpGeoLocation()
     this.pins = []
-    this.directionController = new TackyTrips.DirectionController(this.map)
+    this.directionController = new TackyTrips.DirectionController(this.map, this.pins)
   },
   setUpGeoLocation: function(){
     this.getCenter()
