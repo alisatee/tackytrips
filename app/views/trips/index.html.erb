@@ -3,7 +3,7 @@
     <h1> TackyTrips </h1>
     <ul>
       <li> <a href="#whatisthis"> What is this? </a> </li>
-      <li> <a href="#gosomewhere"> Submit your own!</a></li>
+      <li> <a href="#submit-new"> Submit your own!</a></li>
       <li> <a href="#">Random recommendation </a></li>
       <li> <a href="#">View all destinations </a> </li>
     </ul>
@@ -38,10 +38,18 @@
   <a href="#" class="close"></a>
 </div>
 
-<div id="gosomewhere" class="modalDialog">
-  <div class="modal-text"> Hopefully the google make a road trip instructions will go here
+<div id="submit-new" class="modalDialog">
+  <div class="modal-text"> 
+    <a href="#close" title="Close" class="close">Close Meeee</a>
+    Have a destination that we don't? Feel free to submit yours here! 
+    <form id="new-destination-form">
+      Destination Name: <input type="text" name="destination-name"><br>
+      Address: <input type="text" name="destination-name"><br>
+      Description (feel free to leave this blank! We'll just provide one for you!): <input type="text" name="destination-name"><br>
+      <button type="submit"> Submit </button>
+    </form>
   </div>
-  <a href="#" class="close"></a>
+
 </div>
 
 

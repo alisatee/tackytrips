@@ -1,5 +1,5 @@
 class Trip < ActiveRecord::Base
-  before_save :get_latlong, on: :create
+  # before_save :get_latlong, on: :create
 
   # def get_latlong 
   #   address_query = self.address.gsub(" ", "+")  

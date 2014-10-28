@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 20141020185200) do
   create_table "trips", force: true do |t|
     t.string   "name"
     t.string   "address"
-    t.string   "description"
+    t.string   "website"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "lat"
