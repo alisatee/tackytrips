@@ -3,16 +3,15 @@ TackyTrips.Map = function(mapSelector){
     center: { lat: 37, lng: -122},
     zoom: 4
   }
-  this.initialize(mapSelector, mapOtions)
+  this.pins = []
   this.getAllPinLocations()
+  this.initialize(mapSelector, mapOtions)
 }
 
 TackyTrips.Map.prototype = {
   initialize: function(mapSelector, mapOtions) {
     this.map = new google.maps.Map($(mapSelector)[0], mapOtions);
     this.setUpGeoLocation()
-    this.pins = []
-    this.directionController = new TackyTrips.DirectionController(this.map, this.pins)
   },
   setUpGeoLocation: function(){
     this.getCenter()
@@ -31,23 +30,23 @@ TackyTrips.Map.prototype = {
     })
   },
   getAllPinLocations: function(){
-    $.ajax({
-      url: '/trips',
-    }).done(this.processPins.bind(this))
+    $.ajax({ url: '/trips' }).done(this.processPins.bind(this))
   },
   processPins: function(allPins){
     for (var i = 0; i < allPins.trips.length; i++){
       this.createAPin(allPins.trips[i]).then(function(pin){this.dropAPin(pin)}.bind(this))
     }
+    this.directionController = new TackyTrips.DirectionController(this.map, this.pins)
   },
   createAPin: function(pin){
+    var that = this    
     return new Promise(function(success,fail){
       pin = new TackyTrips.Pin(pin)
+      that.pins.push(pin)
       success(pin)
     })
   },
   dropAPin: function(pin){
-    this.pins.push(pin)
       var latLong = new google.maps.LatLng(pin.lat, pin.lng)
       var marker = new google.maps.Marker({
         position: latLong,

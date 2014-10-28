@@ -1,9 +1,9 @@
 TackyTrips.DirectionController = function(map, pins){
   this.map = map
   this.pins = pins 
-  console.log(this.pins)
+  this.directionView = new TackyTrips.DirectionView
+  this.directionProcessor = new TackyTrips.DirectionProcessor(this.pins)
   this.initialize()
-
 }
 
 TackyTrips.DirectionController.prototype = {
@@ -18,7 +18,6 @@ TackyTrips.DirectionController.prototype = {
   },
   bindFormInputs: function(){
     var that = this
-    console.log(that)
     $('#direction-form').on("submit", function(ev){
       ev.preventDefault()
       var form = this
@@ -43,8 +42,15 @@ TackyTrips.DirectionController.prototype = {
     this.directionsService.route(request, function(response, status){
       if (status == google.maps.DirectionsStatus.OK){
         that.directionsDisplay.setDirections(response)
+        that.writtenDirectionsProcess(response)
       }
     })
+    this.directionView.addSeeDirectionsButton()
+  },
+  writtenDirectionsProcess: function(directions){
+    // console.log(directions.routes[0].legs[0])
+    this.directionProcessor.getRelativePins(directions)
+    this.directionView.renderDirections(directions.routes[0].legs[0])
   }
 
 }
