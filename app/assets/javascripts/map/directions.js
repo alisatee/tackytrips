@@ -1,8 +1,9 @@
-TackyTrips.DirectionController = function(map, pins){
+TackyTrips.DirectionController = function(map, pins, mapController){
   this.map = map
+  this.mapController = mapController
   this.pins = pins 
   this.directionView = new TackyTrips.DirectionView
-  this.directionProcessor = new TackyTrips.DirectionProcessor(this.pins)
+  this.directionProcessor = new TackyTrips.DirectionProcessor(this.pins, this.map)
   this.initialize()
 }
 
@@ -49,7 +50,8 @@ TackyTrips.DirectionController.prototype = {
   },
   writtenDirectionsProcess: function(directions){
     // console.log(directions.routes[0].legs[0])
-    this.directionProcessor.getRelativePins(directions)
+    var pinsToRender = this.directionProcessor.getRelativePins(directions)
+    this.mapController.dropAllPins(pinsToRender)
     this.directionView.renderDirections(directions.routes[0].legs[0])
   }
 

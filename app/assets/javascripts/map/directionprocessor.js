@@ -17,7 +17,10 @@ TackyTrips.DirectionProcessor.prototype = {
         } 
       }
     }
-    console.log(_.union(pinsOnPath))
+
+    var pinsToDrop = _.union(pinsOnPath)
+    return pinsToDrop
+    // this.map.dropAllPins(pinsToDrop)
   }
 
 }

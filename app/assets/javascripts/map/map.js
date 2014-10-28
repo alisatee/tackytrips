@@ -34,17 +34,24 @@ TackyTrips.Map.prototype = {
   },
   processPins: function(allPins){
     for (var i = 0; i < allPins.trips.length; i++){
-      this.createAPin(allPins.trips[i]).then(function(pin){this.dropAPin(pin)}.bind(this))
+      this.createAPin(allPins.trips[i])
+
+      // .then(function(pin){this.dropAPin(pin)}.bind(this))
     }
-    this.directionController = new TackyTrips.DirectionController(this.map, this.pins)
+    this.directionController = new TackyTrips.DirectionController(this.map, this.pins, this)
   },
   createAPin: function(pin){
     var that = this    
-    return new Promise(function(success,fail){
+    // return new Promise(function(success,fail){
       pin = new TackyTrips.Pin(pin)
       that.pins.push(pin)
-      success(pin)
-    })
+    //   success(pin)
+    // })
+  },
+  dropAllPins: function(pins){
+    for(var i = 0; i < pins.length; i++){
+      this.dropAPin(pins[i])
+    }
   },
   dropAPin: function(pin){
       var latLong = new google.maps.LatLng(pin.lat, pin.lng)
