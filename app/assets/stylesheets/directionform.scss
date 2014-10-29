@@ -1,6 +1,6 @@
 .direction-input {
   border-radius: 20px;
-  width: 30em;
+  width: 25%;
   z-index: 3;
   top: 30%;
   position: fixed;
@@ -11,21 +11,28 @@
   #car-icon {
     color: rgba(26,188,156, .9);
   }
+  a, a:visited {
+    text-decoration: none;
+    color: rgba(26,188,156, .9);
+  }
   button {
     background: none;
     border: none;
     outline: none;
+  }
+  h1 {
+    font-size: 14pt;
   }
   button:hover {
     cursor: pointer;
   }
   input {
     border-radius: 3px;
-    width: 20em;
+    width: 80%;
     border: none;
     box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset, 0 -1px 0 rgba(0,0,0,0.05) inset;
     height: 36px;
-    font-size: 20px;
+    font-size: 11pt;
     transition: all 0.2s linear;
   }
   input:focus {
